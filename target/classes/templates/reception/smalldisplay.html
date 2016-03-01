@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+	layout:decorator="layout">
+<head>
+<title>掲示板(小)</title>
+</head>
+<body>
+	<div layout:fragment="content" class="col-sm-12">
+		<legend>掲示板(小)</legend>
+		<table class="table table-striped table-bordered table-condensed">
+			<tr th:each="calledNo : ${smalldisplay.calledNoList}">
+				<td>
+					<label th:text="${calledNo}">1</label>
+				</td>
+			</tr>
+		</table>
+		<hr />
+		<table class="table table-striped table-bordered table-condensed">
+			<tr th:each="waitingNo : ${smalldisplay.waitingNoList}">
+				<td>
+					<label th:text="${waitingNo}">1</label>
+				</td>
+			</tr>
+		</table>
+		<script src="../js/lib/stomp.js"></script>
+		<script src="../js/stompUtil.js"></script>
+		<script type="text/javascript">
+		$(window).load( function() {
+			var reload = function() {
+				stompUtil.disconnect();
+				location.href = "/pepper/reception/smalldisplay";
+			}
+			// websocketで状態変化を受信したらリロード
+			StompUtil.prototype.onSubscribeStateChanged = reload;
+			var stompUtil = new StompUtil();
+			stompUtil.connect.bind(stompUtil);
+			stompUtil.connect();
+		});
+		</script>
+	</div>
+</body>
+</html>

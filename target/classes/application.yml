@@ -1,0 +1,21 @@
+## YAML Template.
+spring:
+  datasource:
+#    driverClassName: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
+#    url: jdbc:log4jdbc:mysql://192.168.56.101:3306/devdb
+    driverClassName: com.mysql.jdbc.Driver
+    url: jdbc:mysql://192.168.56.101:3306/devdb
+    username: devMaria
+    password: devMaria
+  jpa:
+    hibernate:
+      show-sql: true
+      ddl-auto: update
+    database-platform: org.hibernate.dialect.MySQLDialect
+  data:
+    jpa:
+      repositories:
+        enabled: true
+  thymeleaf.cache: false
+server:
+  context-path: /pepper
