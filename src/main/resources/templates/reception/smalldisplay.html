@@ -30,7 +30,7 @@
 			var reload = function() {
 				stompUtil.disconnect();
 				location.href = "/pepper/reception/smalldisplay";
-			}
+			};
 			// websocketで状態変化を受信したらリロード
 			StompUtil.prototype.onSubscribeStateChanged = reload;
 			var stompUtil = new StompUtil();

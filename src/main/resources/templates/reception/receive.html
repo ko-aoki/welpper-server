@@ -43,10 +43,16 @@
 		<script th:src="@{/js/stompUtil.js}"></script>
 		<script type="text/javascript">
 		$(window).load( function() {
-			var reloadPage = function() {
+			var sendedId;
+			var reloadPage = function(msg) {
+				var dto = JSON.parse(msg.body);
+				console.log(dto);
+				if (dto.displayId == sendedId) {
+					alert(dto.displayId + "を呼び出しました。");
+				}
 				stompUtil.disconnect();
 				location.href = "/pepper/reception";
-			}
+			};
 			// websocketで状態変化を受信したらリロード
 			StompUtil.prototype.onSubscribeStateChanged = reloadPage;
 			var stompUtil = new StompUtil();
@@ -54,6 +60,7 @@
 			stompUtil.connect.bind(stompUtil);
 			var callSelectedNo = function(evt) {
 				var displayId = $(evt.target).attr("data");
+				sendedId = displayId;
 				stompUtil.sendChangeState(
 						JSON.stringify(
 								{

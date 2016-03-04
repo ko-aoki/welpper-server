@@ -19,10 +19,10 @@ public class WebSocketController {
 
     @MessageMapping(value = "/changeState" /* 宛先名 */) // Controller内の@MessageMappingアノテーションをつけたメソッドが、メッセージを受け付ける
     @SendTo(value = "/topic/stateChanged") // 処理結果の送り先
-    String changeState(StatusChangeDto dto) {
+    StatusChangeDto changeState(StatusChangeDto dto) {
     	
         System.out.println("received " + dto.getDisplayId());
         service.changeState(dto.getDisplayId(), dto.getStatusCd());
-        return "changed";
+        return dto;
     }
 }
