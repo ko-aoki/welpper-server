@@ -3,8 +3,9 @@ spring:
   datasource:
 #    driverClassName: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
 #    url: jdbc:log4jdbc:mysql://192.168.56.101:3306/devdb
-    driverClassName: com.mysql.jdbc.Driver
     url: jdbc:mysql://192.168.56.101:3306/devdb
+#    driverClassName: com.mysql.jdbc.Driver
+    driver-class-name: com.mysql.jdbc.Driver
     username: devMaria
     password: devMaria
   jpa:
