@@ -1,0 +1,18 @@
+	<div th:fragment="display_content" id="smalldisplayFragment" class="col-sm-12">
+		<legend>掲示板(小)</legend>
+		<table class="table table-striped table-bordered table-condensed">
+			<tr th:each="calledNo : ${smalldisplay.calledNoList}">
+				<td>
+					<label th:text="${calledNo}">1</label>
+				</td>
+			</tr>
+		</table>
+		<hr />
+		<table class="table table-striped table-bordered table-condensed">
+			<tr th:each="waitingNo : ${smalldisplay.waitingNoList}">
+				<td>
+					<label th:text="${waitingNo}">1</label>
+				</td>
+			</tr>
+		</table>
+	</div>

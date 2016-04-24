@@ -36,7 +36,6 @@ StompUtil.prototype.onSubscribeStateChanged = function (message) {
  * 宛先'/app/changeState'へのメッセージ送信処理
  */
 StompUtil.prototype.sendChangeState = function (param) {
-//    this.stompClient.send('/app/changeState', {}, JSON.stringify({"message": name})); // 宛先'/app/changeState'へメッセージを送信
     this.stompClient.send('/app/changeState', {}, param); // 宛先'/app/changeState'へメッセージを送信
 };
 

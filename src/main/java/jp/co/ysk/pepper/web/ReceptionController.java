@@ -76,4 +76,28 @@ public class ReceptionController {
     	model.addAttribute("smalldisplay", frm);
     	return "/reception/smalldisplay";
     }
+
+	@RequestMapping(value = "smalldisplayFragment", method = RequestMethod.GET, produces="text/plain;charset=UTF-8")
+	String displaySmallFragment(Model model) {
+
+		List<TrnReception> recs = service.findReceptionByWindowId("1");
+
+		// TODO : マッピングをdozerとか
+		SmallDisplayForm frm = new SmallDisplayForm();
+		List calledList = new ArrayList<>();
+		List waitingList = new ArrayList<>();
+		for (TrnReception rec :recs) {
+			if ("1".equals(rec.getStatusCd())) {
+				calledList.add(rec.getDisplayId());
+			} else if ("4".equals(rec.getStatusCd())){
+				waitingList.add(rec.getDisplayId());
+			}
+		}
+
+		frm.setCalledNoList(calledList);
+		frm.setWaitingNoList(waitingList);
+
+		model.addAttribute("smalldisplay", frm);
+		return "reception/smalldisplay_fragment :: display_content";
+	}
 }
