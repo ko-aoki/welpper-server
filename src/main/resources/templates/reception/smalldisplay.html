@@ -8,9 +8,9 @@
 	<script th:src="@{/js/stompUtil.js}"></script>
 	<script type="text/javascript">
 		$(window).load( function() {
-			var reload = function() {
-//				stompUtil.disconnect();
-//				location.href = "/pepper/reception/smalldisplay";
+			var reloadPage = function(msg) {
+				var dto = JSON.parse(msg.body);
+				console.log(dto);
 				$.ajax({
 					type : "GET",
 					url : "/pepper/reception/smalldisplayFragment",
@@ -24,7 +24,7 @@
 				});
 			}
 			// websocketで状態変化を受信したらリロード
-			StompUtil.prototype.onSubscribeStateChanged = reload;
+			StompUtil.prototype.onSubscribeStateChanged = reloadPage;
 			var stompUtil = new StompUtil();
 			stompUtil.connect.bind(stompUtil);
 			stompUtil.connect();
