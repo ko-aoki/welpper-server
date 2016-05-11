@@ -14,18 +14,15 @@ public class WebSocketSecurityConfig extends
 
     protected void configureInbound(MessageSecurityMetadataSourceRegistry
                                             messages) {
-        messages //
-                .nullDestMatcher().permitAll() //
+        messages // 向先指定の上、全て許可
                 .simpDestMatchers("/endpoint/**").permitAll() //
                 .simpDestMatchers("/app/**").permitAll() //
-                .simpSubscribeDestMatchers("/topic/**").permitAll() //
-                .simpTypeMatchers(SimpMessageType.MESSAGE,
-                        SimpMessageType.SUBSCRIBE).permitAll() //
-                .anyMessage().permitAll();
+                .simpSubscribeDestMatchers("/topic/**").permitAll();
     }
 
     // e.g. http://docs.spring.io/spring-security/site/docs/current/reference/html/websocket.html
     // 20.4.4
+    // CSRFの無効化
     @Override
     protected boolean sameOriginDisabled() {
         return true;
